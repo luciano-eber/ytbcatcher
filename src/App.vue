@@ -23,6 +23,17 @@ html, body
 
 #app
   width: 100%
+  height: 100%
+  font-size: 100%
 
-
+.search-bar
+  width: 100%
+  .form-group
+    width: 100%
+    .bv-no-focus-ring
+        display: flex
+        flex-flow: row nowrap
+        align-items: center
+        justify-content: center
+        width: 100%
 </style>

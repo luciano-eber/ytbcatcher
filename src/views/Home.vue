@@ -1,28 +1,14 @@
 <template>
     <div class="home-search">
         <img src="./../assets/logo.png">
-        <b-form class="search-bar" @submit="goSearch">
-            <b-form-group id="input-group-1">
-                <b-form-input id="input-1" type="text" placeholder="Pesquisar Vídeos" v-model="search"></b-form-input>
-                <b-button variant="primary" class="ml-2" type="submit"><b-icon icon="search"></b-icon></b-button>
-            </b-form-group>
-        </b-form>
+        <search-redirect></search-redirect>
     </div>
 </template>
 <script>
+import SearchRedirect from './../components/SearchRedirect'
 export default {
     name: "Home",
-    data() {
-        return {
-            search: ""
-        }
-    },
-    methods: {
-        goSearch(e) {
-            e.preventDefault()
-            this.$router.push({name: "Search", params: {search: this.search}})
-        }
-    }
+    components:{ SearchRedirect },
 }
 </script>
 <style lang="sass">

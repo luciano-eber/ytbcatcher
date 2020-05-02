@@ -9,7 +9,7 @@ Vue.use(VueRouter)
     component: () => import('../views/Home.vue')
   },
   {
-    path: '/search',
+    path: '/search/:search',
     name: 'Search',
     component: () => import('../views/Search.vue')
   },

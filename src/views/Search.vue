@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- search -->
+        <!-- search (NO REDIRECT) -->
         <div class="row mt-3 mb-3">
             <div class="col-12">
                 <b-form class="search-bar" @submit.prevent="getVideos">
@@ -15,12 +15,16 @@
         <!-- alerts -->
         <div class="row" v-if="error == true">
             <div class="col-12">
-                <b-alert show variant="danger">Ops, aconteceu algo errado a busca não pode ser concluída</b-alert>
+                <b-alert show variant="danger">
+                    Ops, aconteceu algo errado a busca não pode ser concluída
+                </b-alert>
             </div>
         </div>
         <div class="row" v-if="emptySearch == true">
             <div class="col-12">
-                <b-alert show variant="warning">Digite algo para buscar...</b-alert>
+                <b-alert show variant="warning">
+                    Digite algo para buscar...
+                </b-alert>
             </div>
         </div>
 
@@ -34,7 +38,7 @@
                     <b-card-text>
                         {{video.snippet.title.substring(0,50)}} {{(video.snippet.title.length >= 50) ? '...' : ''}}
                     </b-card-text>
-                    <router-link :to="{name: 'Player', params: {id: video.id.videoId , video: video}}"  class="btn btn-outline-primary btn-block">Visualizar</router-link>
+                    <router-link :to="{name: 'Player', params: {id: video.id.videoId , video: video, search: search}}"  class="btn btn-outline-primary btn-block">Visualizar</router-link>
                 </b-card>
             </div>
         </div>
@@ -45,8 +49,8 @@ export default {
     name: "List",
     data() {
         return {
-            search: '',
             searchDisplay: '',
+            search: '',
             videos:[],
             error: false,
             emptySearch: false
@@ -73,21 +77,23 @@ export default {
                         key: `${process.env.VUE_APP_G_KEY}`,
                         part: 'snippet',
                         q: this.search,
-                        maxResults: 6,
+                        maxResults: 12,
                         type: 'video'
                     }
                 }).then(res => {
                     this.searchDisplay = this.search
                     this.videos = res.data.items
+                    console.log(res)
                     this.error = false
                 }).catch(error => {
                     console.log(error)
                     this.error = true
+                    setTimeout(()=> this.error = false, 5000)
                 })
             } else {
                 this.emptySearch = true
             }
-        }
+        },
     }
 }
 </script>

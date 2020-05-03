@@ -1,6 +1,6 @@
 <template>
     <div class="home-search">
-        <img src="./../assets/logo.png">
+        <img src="./../assets/youtube-svg-catcher.svg" width="400px" style="margin-bottom: 20px;">
         <search-redirect></search-redirect>
     </div>
 </template>

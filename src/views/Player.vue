@@ -20,6 +20,12 @@
             <div class="col-12 mt-3">
                 <h5>{{video.snippet.title}}</h5>
             </div>
+            <div class="col-12 mt-3">
+                <iframe :src="downloadURL" style="width: 300px; height: 40px; border: 0px;"></iframe>
+                <noscript>
+                    <a :href="aURL">Youtube to MP3</a>
+                </noscript>
+            </div>
         </div>
     </div>
 </template>
@@ -30,9 +36,13 @@ export default {
     components:{ SearchRedirect },
     created() {
         this.video = this.$route.params.video
+        if(!this.video) this.$router.push('/')
+        
         this.videoId = this.$route.params.id
-        // this.search = this.$route.params.search
+        this.search = this.$route.params.search
         this.url = `https://www.youtube.com/embed/${this.videoId}`
+        this.downloadURL = `//recordmp3.co/#/watch?v=${this.videoId}&layout=button&t_press_to_start=Baixar%20em%20mp3&t_waiting_for_worker=Aguardando%20Resposta...&t_in_queue=Trabalhando...&t_fetching_information=Obtendo%20informa%C3%A7%C3%B5es&t_converting=Convertendo&t_done=Baixar%20em%20mp3`
+        this.aURL = `https://recordmp3.co/#/watch?v=${this.videoId}`
         this.search = this.$route.params.search
     },
     data() {
@@ -40,9 +50,10 @@ export default {
             video: null,
             videoId: '',
             url: '',
+            downloadURL: '',
             search: ''
         }
-    }
+    },
 }
 </script>
 <style lang="sass">
@@ -55,7 +66,8 @@ export default {
     @media(min-width: 1200px)
         height: 40rem
 
-
+.pure-button-download-ready[data-v-3157a973]
+    background-color: red !important
     
 
 </style>

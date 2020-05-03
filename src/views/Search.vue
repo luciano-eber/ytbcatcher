@@ -81,6 +81,7 @@ export default {
         }
     },
     created() {
+        console.log('created')
         this.search = this.$route.params.search
         if(this.search != undefined)
             this.getVideos()
@@ -98,6 +99,7 @@ export default {
         searchInput() {
             if(this.search.length) {
                 this.emptySearch = false
+                this.$router.replace(`/search/${this.search}`);
                 this.getVideos()
             } else {
                 this.emptySearch = true
@@ -106,6 +108,7 @@ export default {
             
         },
         getVideos(settings) {  
+            console.log('get Videos')
             if(this.search == '')
                 this.search = this.$route.params.search
             this.videos = []
